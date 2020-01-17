@@ -11,20 +11,16 @@
   <center>
     Lifetime Trips: {{ data.lifetime_trips }}
     <br>
-    Lifetime Spend: {{ data.lifetime_spend }}
+    Lifetime Spend: {{ "${:,.2f}".format(data.lifetime_spend) }}
     <br>
-    Cheapest Trip: {{ data.cheapest.Cost }}
+    Average Wait Time: {{ data.avg_wait }}
     <br>
-    Most Expensive Trip: {{ data.expensive.Cost }}
-
-    <br>
+    {{data.concat|safe}}
   </center>
 </div>
 {% endblock %}
 
 {% block addScripts %}
-<script src="https://d3js.org/d3.v4.js"></script>
 <script type="text/javascript">
-
 </script>
 {% endblock %}

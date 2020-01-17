@@ -26,6 +26,32 @@ def upload_file():
 
 def basic_analytics(file):
     df = pd.read_csv(file)
+    df = preprocess_dataframe(df)
+    uber = df.drop(df[df['Service'].str.contains('EAT')].index)
+    uber.head(2)
+    #lifetime stats
+    num_trips = len(uber)
+    spend = sum(uber['Cost'])
+    nonzero = uber[uber.Cost > 0.0]
+    cheapest = nonzero.loc[[nonzero.Cost.idxmin()]]
+    expensive = uber.loc[[uber.Cost.idxmax()]]
+    closest = uber.loc[[uber.Distance.idxmin()]]
+    farthest = uber.loc[[uber.Distance.idxmax()]]
+    shortest = uber.loc[[uber.TripTime.idxmin()]]
+    longest = uber.loc[[uber.TripTime.idxmax()]]
+    description = ['Cheapest', 'Most Expensive', 'Closest', 'Farthest', 'Shortest', 'Longest']
+    concat = pd.concat([cheapest, expensive, closest, farthest, shortest, longest])
+    concat.insert(0, "Description", description)
+    avg_wait = uber.WaitTime.mean()
+    print(avg_wait)
+    return {
+        'lifetime_trips':num_trips,
+        'lifetime_spend':spend,
+        'avg_wait': avg_wait,
+        'concat': concat.to_html(index=False)
+    }
+
+def preprocess_dataframe(df):
     df.rename(columns={'Product Type':'Service','Fare Amount':'Cost','Begin Trip Time':'BeginTimestamp',
                        'Dropoff Time':'EndTimestamp','Request Time':'RequestTimestamp','Distance (miles)':'Distance'}, inplace=True)
     df["BeginTimestamp"] = df["BeginTimestamp"].str.replace(" UTC", "")
@@ -43,39 +69,4 @@ def basic_analytics(file):
             df.drop([index],inplace=True)
 
     df = df[df['Trip or Order Status']=='COMPLETED']
-    uber = df.drop(df[df['Service'].str.contains('EAT')].index)
-    uber.head(2)
-    #lifetime stats
-    num_trips = len(uber)
-    spend = sum(uber['Cost'])
-    nonzero = uber[uber.Cost > 0.0]
-    cheapest = nonzero.loc[[nonzero.Cost.idxmin()]]
-    expensive = uber.loc[[uber.Cost.idxmax()]]
-    closest = uber.loc[[uber.Distance.idxmin()]]
-    farthest = uber.loc[[uber.Distance.idxmax()]]
-    shortest = uber.loc[[uber.TripTime.idxmin()]]
-    longest = uber.loc[[uber.TripTime.idxmax()]]
-    avg_wait = uber.WaitTime.mean()
-
-    return {
-        'lifetime_trips':num_trips,
-        'lifetime_spend':spend,
-        'cheapest':cheapest,
-        'expensive': expensive,
-        'closest': closest,
-        'farthest': farthest,
-        'shortest': shortest,
-        'longest': longest,
-        'avg_wait': avg_wait
-    }
-
-
-    # 'piechart': piechart
-
-
-    #
-    # uberx = ((uber.Service.str.findall(r'\b({0})\b'.format('uberx'), flags=re.IGNORECASE)).map(lambda x: len(x)) >  0).sum()
-    # uberpool = ((uber.Service.str.findall('pool', flags=re.IGNORECASE)).map(lambda x: len(x)) >  0).sum()
-    # uberxl = ((uber.Service.str.findall(r'\b({0})\b'.format('uberxl'), flags=re.IGNORECASE)).map(lambda x: len(x)) >  0).sum()
-    # total = len(uber.Service)
-    # piechart = plt.pie([uberx, uberpool, uberxl,total-(uberx+uberpool+uberxl)],labels=['UberX','UberPool', 'UberXL', 'Other'])
+    return df
