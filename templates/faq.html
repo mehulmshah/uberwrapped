@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="emptyspace"></div>
+
+<div class="row">
+  <div class="col-xs-12 text-center"><h3>Create a unique ID</h3></div>
+</div>
+<br>
+<div class="row">
+  <form id="orderIDform" method='post' action='/admin'>
+    <div class="form-group">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-4">
+        <input class="form-control input-md" name="orderID" type="text" placeholder="Enter an order ID"  required>
+      </div>
+      <div class="col-xs-2">
+        <input class="form-control input-md" name="password" type="password" placeholder="Password" required>
+      </div>
+      <div class="col-xs-2" text-center>
+        <button class="btn btn-success" type="submit">Get Unique ID</button>
+      </div>
+    </div>
+  </form>
+</div>
+<br><br>
+{% if alerttype == 'warning' %}
+  <div class='row'>
+    <div class='alert alert-warning'>{{url}}</div>
+  </div>
+{% elif alerttype == 'success' %}
+  <div class='row'>
+    <div class='alert alert-success'><center><a href={{url}}>Click here for your custom tracking link!</a></center></div>
+  </div>
+{% endif %}
+{% endblock %}
