@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="emptyspace"></div>
+
+<div class="row">
+  <div class="col-xs-12 text-center"><h3>Results</h3></div>
+</div>
+<br>
+<div class="row">
+  <center>
+    Lifetime Trips: {{ data.lifetime_trips }}
+    <br>
+    Lifetime Spend: {{ data.lifetime_spend }}
+    <br>
+    Cheapest Trip: {{ data.cheapest.Cost }}
+    <br>
+    Most Expensive Trip: {{ data.expensive.Cost }}
+
+    <br>
+  </center>
+</div>
+{% endblock %}
+
+{% block addScripts %}
+<script src="https://d3js.org/d3.v4.js"></script>
+<script type="text/javascript">
+
+</script>
+{% endblock %}
