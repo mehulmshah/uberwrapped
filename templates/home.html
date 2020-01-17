@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="emptyspace"></div>
+
+<div class="row">
+  <div class="col-xs-12 text-center"><h3>Upload Your File</h3></div>
+</div>
+<br>
+<div class="row">
+  <center>
+    <form method="post" action="/uploader" enctype="multipart/form-data">
+      <input type="file" name="tripData" />
+      <button class="btn btn-info" type="submit">Submit</button>
+    </form>
+  </center>
+</div>
+{% endblock %}
+
+{% block addScripts %}
+{% endblock %}
