@@ -9,18 +9,22 @@
 <br>
 <div class="row">
   <center>
-    Lifetime Trips: {{ data.lifetime_trips }}
+    <div>Lifetime Trips: <span id="lifetime_trips"></span></div>
     <br>
-    Lifetime Spend: {{ "${:,.2f}".format(data.lifetime_spend) }}
+    <div>Lifetime Spend: <span id="lifetime_spend"></span></div>
     <br>
     Average Wait Time: {{ data.avg_wait }}
     <br>
-    {{data.concat|safe}}
+    <!-- {{data.concat|safe}} -->
   </center>
 </div>
 {% endblock %}
 
 {% block addScripts %}
+<script src="../static/js/countUp.min.js" type="module"></script>
 <script type="text/javascript">
+  var spend = {{ data.lifetime_spend }};
+  var trips = {{ data.lifetime_trips }};
 </script>
+<script src="../static/js/main.js" type="module"></script>
 {% endblock %}
