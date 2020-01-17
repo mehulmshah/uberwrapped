@@ -42,12 +42,12 @@ def basic_analytics(file):
     description = ['Cheapest', 'Most Expensive', 'Closest', 'Farthest', 'Shortest', 'Longest']
     concat = pd.concat([cheapest, expensive, closest, farthest, shortest, longest])
     concat.insert(0, "Description", description)
-    avg_wait = uber.WaitTime.mean()
-    print(avg_wait)
+    avg_wait_min = (uber.WaitTime.mean().seconds//60)%60
+    avg_wait_sec = uber.WaitTime.mean().seconds - avg_wait_min*60
     return {
         'lifetime_trips':num_trips,
         'lifetime_spend':spend,
-        'avg_wait': avg_wait,
+        'avg_wait': {'min':avg_wait_min,'sec':avg_wait_sec},
         'concat': concat.to_html(index=False)
     }
 

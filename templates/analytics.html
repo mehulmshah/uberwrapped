@@ -3,20 +3,11 @@
 {% block content %}
 <div class="emptyspace"></div>
 
-<div class="row">
-  <div class="col-xs-12 text-center"><h3>Results</h3></div>
-</div>
-<br>
-<div class="row">
-  <center>
-    <div>Lifetime Trips: <span id="lifetime_trips"></span></div>
-    <br>
-    <div>Lifetime Spend: <span id="lifetime_spend"></span></div>
-    <br>
-    Average Wait Time: {{ data.avg_wait }}
-    <br>
-    <!-- {{data.concat|safe}} -->
-  </center>
+<div class="lineone">Results </div>
+<div class="linetwo"><div>Lifetime Trips: <span id="lifetime_trips"></span></div></div>
+<div class="linethree"><div>Lifetime Spend: <span id="lifetime_spend"></span></div></div>
+<div class="linefour">Average Wait Time:
+  <span id="avg_wait_minutes"></span>:0<span id="avg_wait_seconds"></span>
 </div>
 {% endblock %}
 
@@ -25,6 +16,8 @@
 <script type="text/javascript">
   var spend = {{ data.lifetime_spend }};
   var trips = {{ data.lifetime_trips }};
+  var avg_wait_min = {{ data.avg_wait.min }};
+  var avg_wait_sec = {{ data.avg_wait.sec }};
 </script>
 <script src="../static/js/main.js" type="module"></script>
 {% endblock %}

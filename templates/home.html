@@ -1,20 +1,17 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="emptyspace"></div>
-
-<div class="row">
-  <div class="col-xs-12 text-center"><h3>Upload Your File</h3></div>
-</div>
-<br>
-<div class="row">
-  <center>
-    <form method="post" action="/uploader" enctype="multipart/form-data">
-      <input type="file" name="tripData" />
-      <button class="btn btn-info" type="submit">Submit</button>
-    </form>
-  </center>
-</div>
+<div class="lineone">Welcome to </div>
+<div class="linetwo">Uber Analytics Wrapped</div>
+<div class="linethree">Upload Your Data</div>
+<div class="linefour">To Get Started</div>
+<form method="post" action="/uploader" enctype="multipart/form-data">
+  <div class="upload-btn-wrapper">
+    <button class="btn">Upload</button>
+    <input type="file" name="tripData" />
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
 {% endblock %}
 
 {% block addScripts %}
