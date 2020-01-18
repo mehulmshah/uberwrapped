@@ -10,17 +10,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' ) }}">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet/less" type="text/css" href="{{ url_for('static', filename='css/styles.less' ) }}" />
   </head>
   <body>
-    <div class="container">
-      <div class="logo">Mehul Shah</div>
-      {% block content %}
-      {% endblock %}
-    </div>
+    <div class="logo">Mehul Shah</div>
+    {% block content %}
+    {% endblock %}
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
     {% block addScripts %}
     {% endblock %}
   </body>

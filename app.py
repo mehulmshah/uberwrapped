@@ -12,17 +12,14 @@ app = Flask(__name__)
 def faq():
     return render_template('faq.html', alerttype='success', url=url)
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
-    return render_template('home.html')
-
-@app.route('/uploader', methods = ['GET', 'POST'])
-def upload_file():
-   if request.method == 'POST':
-      f = request.files['tripData']
-      analyticsObj = basic_analytics(f)
-      return render_template('analytics.html', data=analyticsObj)
-
+    if request.method == 'GET':
+        return render_template('home.html')
+    elif request.method == 'POST':
+        f = request.files['tripData']
+        analyticsObj = basic_analytics(f)
+        return render_template('analytics.html', data=analyticsObj)
 
 def basic_analytics(file):
     df = pd.read_csv(file)
