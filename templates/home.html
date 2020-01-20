@@ -6,13 +6,38 @@
 <div class="linethree">Upload Your Data</div>
 <div class="linefour">To Get Started</div>
 <form method="post" action="/" enctype="multipart/form-data">
-  <div class="wrapper">
+  <div class="wrapper" style="float:left">
     <input type="file" id="file" name="tripData"/>
-    <label for="file" /> choose a file </label>
+    <label for="file" id="filename"/> choose a file </label>
+    <div id="filename"></div>
   </div>
-  <button type="submit">show me the money</button>
+  <button type="submit" style="margin-left:5px">show me the money</button>
+  <i class="fas fa-check-square" style="font-size:30px;color:green" id="check"></i>
+  <i class="fas fa-exclamation-triangle" style="font-size:30px;color:red" id="fail"></i>
 </form>
 {% endblock %}
 
 {% block addScripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#check').hide();
+  $('#fail').hide();
+});
+$('#file').change(function() {
+  var filename = $(this).val();
+  var lastIndex = filename.lastIndexOf("\\");
+  if (lastIndex >= 0) {
+    filename = filename.substring(lastIndex + 1);
+  }
+  $('#filename').text(filename);
+  if (filename == 'trips_data.csv') {
+    $('#check').show();
+    $('#fail').hide();
+  }
+  else {
+    $('#check').hide();
+    $('#fail').show();
+  }
+});
+</script>
 {% endblock %}
